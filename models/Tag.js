@@ -8,16 +8,6 @@ const TagSchema = new Schema({
 		required: true,
 		unique: true,
 		trim: true
-	},
-	description: {
-		type: String,
-		trim: true,
-		default: ''
-	},
-	website: {
-		type: String,
-		trim: true,
-		default: ''
 	}
 });
 

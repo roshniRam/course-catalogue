@@ -12,10 +12,6 @@ const TutorialSchema = new Schema({
 		required: true,
 		unique: true
 	},
-	description: {
-		type: String,
-		required: true
-	},
 	tags: [String],
 	medium: {
 		type: String,
@@ -31,32 +27,7 @@ const TutorialSchema = new Schema({
 	skillLevel: {
 		type: String,
 		required: true
-	},
-	submittedBy: {
-		type: Schema.Types.ObjectId,
-		ref: 'user'
-	},
-	submittedOn: {
-		type: Date,
-		default: Date.now
-	},
-	upvotes: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'user'
-		}
-	],
-	reviews: [
-		{
-			review: {
-				type: String
-			},
-			reviewedBy: {
-				type: Schema.Types.ObjectId,
-				ref: 'user'
-			}
-		}
-	]
+	}
 });
 
 const Tutorial = mongoose.model('tutorial', TutorialSchema);

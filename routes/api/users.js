@@ -1,7 +1,6 @@
 const router = require('express').Router();
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
-const passport = require('passport');
 
 const { secretOrKey, emailVerificationKey } = require('../../config/keys');
 
@@ -12,46 +11,6 @@ const quickemailverification = require('quickemailverification')
 const User = require('../../models/User');
 
 // Routes for /api/users
-
-// Type		GET
-// URL		/api/users/me
-// Desc		Return current user
-router.get('/me', passport.authenticate('jwt', { session: false }), (req, res) => {
-	// Array of fields to populate while returning the user
-	const tutorialFields = [
-		'title',
-		'link',
-		'description',
-		'tags',
-		'medium',
-		'educator',
-		'type',
-		'skillLevel',
-		'submittedBy',
-		'submittedOn',
-		'upvotes',
-		'reviews'
-	];
-
-	// 1 - Find the user by ID from request's user object
-	// 2 - Populate the 'submittedTutorials' and 'favorites' arrays of the user with the above fields
-	// 3 - Return the user object in response
-	User.findById(req.user._id)
-		.populate('submittedTutorials', tutorialFields)
-		.populate('favorites', tutorialFields)
-		.then(user => {
-			const currentUser = {
-				_id: user._id,
-				name: user.name,
-				email: user.email,
-				submittedTutorials: user.submittedTutorials,
-				favorites: user.favorites,
-				upvotes: user.upvotes
-			};
-			res.json({ user: currentUser });
-		})
-		.catch(err => res.status(500).json({ error: 'Unable to get profile', errorMsg: err }));
-});
 
 // Type		POST
 // URL		/api/users/login
@@ -99,7 +58,7 @@ router.post('/register', (req, res) => {
 		if (user) {
 			return res.status(400).json({ error: 'Email already exist' });
 		} else {
-			quickemailverification.verify(req.body.email, function(err, response) {
+			quickemailverification.verify(req.body.email, (err, response) => {
 				if (response.body.result === 'valid') {
 					const newUser = new User({
 						name: req.body.name,
@@ -111,9 +70,6 @@ router.post('/register', (req, res) => {
 						.save()
 						.then(user => {
 							const newUser = {
-								submittedTutorials: user.submittedTutorials,
-								favorites: user.favorites,
-								upvotes: user.upvotes,
 								_id: user._id,
 								name: user.name,
 								email: user.email

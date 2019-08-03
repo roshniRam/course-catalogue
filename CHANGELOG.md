@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [2.0.0] - 2019-08-03
+
+### Removed
+
+-   Tag details, Reviews, Favorites, Submitter's details, User profile APIs.
+
 ## [1.2.1] - 2018-11-2
 
 ### Bug Fixes

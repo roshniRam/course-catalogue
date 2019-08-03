@@ -16,25 +16,7 @@ const UserSchema = new Schema({
 	password: {
 		type: String,
 		required: true
-	},
-	submittedTutorials: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'tutorial'
-		}
-	],
-	favorites: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'tutorial'
-		}
-	],
-	upvotes: [
-		{
-			type: Schema.Types.ObjectId,
-			ref: 'tutorial'
-		}
-	]
+	}
 });
 
 // This runs before saving the user

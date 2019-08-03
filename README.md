@@ -1,7 +1,5 @@
 # Course Catalogue
 
-![Logo](./client/src/img/logo_poster.png)
-
 ### About
 
 Recently the number of online educational sites have grown in huge numbers and so did their content. While each one of them claim to provide the best content it is difficult or rather tedious for someone to compare the courses of a specific topic offered by each one of them and choose the best for themselves.
@@ -67,12 +65,12 @@ npm run test:watch
 -   [Express](http://expressjs.com)
 -   [MongoDB](http://mongodb.com)
 -   [Mongoose](http://mongoosejs.com)
--   [Passport](http://www.passportjs.org/)
+-   [Passport](http://www.passportjs.org)
 
 ##### Front End
 
 -   [React](https://reactjs.org)
--   [Ant Design](https://ant.design)
+-   [SCSS](https://sass-lang.com)
 
 ##### State Management
 
