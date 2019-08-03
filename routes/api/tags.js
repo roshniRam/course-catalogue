@@ -29,7 +29,7 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 	// 1 - Create a new tag using Tag model
 	// 2 - Save and return the new tag in response
 	const newTag = req.body.tag
-		.replace(/\#/g, '-sharp')
+		.replace(/#/g, '-sharp')
 		.replace(/\+/g, '-plus')
 		.replace(/^\./g, 'dot-')
 		.replace(/\./g, '-dot-');

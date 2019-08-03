@@ -46,7 +46,7 @@ router.get('/tag/:tag', (req, res) => {
 // Desc		Adds a new tutorial to the database
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
 	// Destructre the fields from request body
-	const { title, educator, link, medium, type, skillLevel, tags, description } = req.body;
+	const { title, educator, link, medium, type, skillLevel, tags } = req.body;
 	// Create a new tutorial with the given fields
 	const tutorial = new Tutorial({
 		title,

@@ -1,11 +1,8 @@
 const request = require('supertest');
 const jwt = require('jsonwebtoken');
-const mongoose = require('mongoose');
 
 const { app } = require('../server');
 const Tag = require('../models/Tag');
-const User = require('../models/User');
-const Tutorial = require('../models/Tutorial');
 const {
 	populateTags,
 	populateUsers,
