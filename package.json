@@ -1,7 +1,7 @@
 {
 	"name": "course-catalogue",
 	"version": "1.2.1",
-	"description": "",
+	"description": "Web App to find online courses",
 	"main": "server.js",
 	"scripts": {
 		"start": "node server.js",
