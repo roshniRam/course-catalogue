@@ -1,0 +1,38 @@
+.auth {
+	height: calc(100vh - 13rem);
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	&__wrapper {
+		width: 50%;
+		background-color: $on-background-color;
+		padding: 4rem 5rem;
+		border-radius: 3px;
+		box-shadow: 0 0.3rem 0.6rem rgba($color-black, 0.2);
+	}
+
+	h1 {
+		display: inline-block;
+		border-bottom: 2px solid $color-primary;
+	}
+
+	&__form {
+		font-size: 1.8rem;
+		display: flex;
+		flex-direction: column;
+
+		button {
+			margin-top: 4rem;
+			align-self: flex-end;
+		}
+	}
+
+	&__form-info {
+		display: block;
+		font-size: 1.2rem;
+		margin-top: 1.5rem;
+		color: $color-white;
+		transition: all 0.2s ease-in;
+	}
+}

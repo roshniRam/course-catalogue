@@ -1,0 +1,13 @@
+.footer {
+	display: flex;
+	justify-content: flex-end;
+	height: 7rem;
+	padding: 2rem 10rem;
+	border-top: 1px solid $color-primary;
+
+	&__link {
+		img {
+			width: 3rem;
+		}
+	}
+}

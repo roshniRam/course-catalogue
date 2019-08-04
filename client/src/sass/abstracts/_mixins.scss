@@ -1,0 +1,9 @@
+@mixin page-layout {
+	padding-top: 4rem;
+
+	h1 {
+		display: inline-block;
+		padding: 0 1rem;
+		border-bottom: 2px solid $color-primary;
+	}
+}

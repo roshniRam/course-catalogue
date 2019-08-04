@@ -1,0 +1,29 @@
+.new-tutorial {
+	@include page-layout;
+
+	&__form {
+		display: grid;
+		grid-template-columns: 3fr 2fr;
+		grid-column-gap: 6rem;
+		margin-bottom: 5rem;
+	}
+
+	&__form-buttons {
+		margin-top: 5rem;
+
+		& > * {
+			display: inline-block;
+		}
+
+		& > *:not(:last-child) {
+			margin-right: 2rem;
+		}
+	}
+
+	&__form-img {
+		justify-self: end;
+		img {
+			width: 25rem;
+		}
+	}
+}

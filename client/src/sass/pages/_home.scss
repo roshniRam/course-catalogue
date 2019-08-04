@@ -1,0 +1,9 @@
+.homepage {
+	@include page-layout;
+
+	&__tags {
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 2rem 1rem;
+	}
+}

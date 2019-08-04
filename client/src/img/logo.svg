@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="76.864" height="55.267" viewBox="0 0 76.864 55.267">
+	<g id="Logo" data-name="Logo" transform="translate(-1172 -583)">
+		<g id="terminal" transform="translate(1172 588.218)">
+		<g id="Group_1" data-name="Group 1" transform="translate(0 0)">
+			<path id="Path_1" data-name="Path 1" d="M226.267,353.02a1.444,1.444,0,0,0-1.07-.419H180.5a1.433,1.433,0,0,0-1.489,1.489v2.98a1.433,1.433,0,0,0,1.489,1.489H225.2a1.434,1.434,0,0,0,1.489-1.489v-2.98A1.441,1.441,0,0,0,226.267,353.02Z" transform="translate(-149.822 -308.51)" fill="#fff" />
+			<path id="Path_2" data-name="Path 2" d="M4.934,82.685a1.463,1.463,0,0,0-2.141,0L.465,85.013a1.465,1.465,0,0,0,0,2.141l18.3,18.3-18.3,18.3a1.465,1.465,0,0,0,0,2.141l2.328,2.327a1.464,1.464,0,0,0,2.141,0l21.7-21.7a1.465,1.465,0,0,0,0-2.142Z" transform="translate(0 -82.219)" fill="#fff" />
+		</g>
+		</g>
+		<text id="C" transform="translate(1210.484 622)" fill="#fff" font-size="42" font-family="FiraCode-Bold, Fira Code" font-weight="700"><tspan x="0" y="0">C</tspan></text>
+	</g>
+</svg>

@@ -1,0 +1,102 @@
+.tutorials {
+	padding-top: 4rem;
+
+	&__h1 {
+		display: inline-block;
+		padding: 0 1rem;
+		border-bottom: 2px solid $color-primary;
+	}
+
+	&__p {
+		font-size: 1.8rem;
+		margin-bottom: 1rem;
+	}
+
+	&__filters {
+		display: flex;
+	}
+
+	&__filter {
+		padding: 2rem 3rem;
+		border-radius: 3px;
+
+		&--red {
+			border: 1px solid #d83636;
+		}
+
+		&--blue {
+			border: 1px solid #0c8a9e;
+		}
+
+		&--green {
+			border: 1px solid #90b807;
+		}
+
+		&:not(:last-child) {
+			margin-right: 3rem;
+		}
+
+		fieldset {
+			border: none;
+		}
+
+		legend {
+			font-size: 1.8rem;
+			margin-bottom: 2rem;
+			text-align: center;
+		}
+	}
+
+	&__checkboxes {
+		display: flex;
+		font-size: 1.6rem;
+	}
+
+	&__checkbox {
+		input {
+			display: none;
+			width: 0;
+		}
+
+		label {
+			display: inline-block;
+			padding: 0.5em 2em;
+			border-radius: 5rem;
+			background-color: $on-background-color;
+			cursor: pointer;
+			transition: all 0.2s ease-out;
+			user-select: none;
+			-webkit-user-select: none;
+			-khtml-user-select: none;
+			-moz-user-select: none;
+			-ms-user-select: none;
+		}
+
+		label:focus {
+			outline: none;
+		}
+
+		input:checked + label.tutorials__checkbox--red {
+			background-color: #d83636;
+		}
+
+		input:checked + label.tutorials__checkbox--blue {
+			background-color: #0c8a9e;
+		}
+
+		input:checked + label.tutorials__checkbox--green {
+			background-color: #90b807;
+		}
+
+		&:not(:last-child) {
+			margin-right: 2rem;
+		}
+	}
+
+	&__list {
+		margin: 3rem 0;
+		display: grid;
+		grid-template-columns: 1fr 1fr 1fr;
+		grid-gap: 2rem 3rem;
+	}
+}

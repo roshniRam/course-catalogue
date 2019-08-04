@@ -1,0 +1,36 @@
+.navbar {
+	background-color: $color-primary;
+	height: 6rem;
+	padding: 1rem 10rem;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+
+	&__logo {
+		display: inline-block;
+
+		img {
+			width: 5rem;
+		}
+	}
+
+	&__links {
+		display: flex;
+		list-style-type: none;
+	}
+
+	&__link {
+		display: inline-block;
+
+		a {
+			color: $color-white;
+			text-decoration: none;
+			font-size: 1.6rem;
+		}
+
+		&:not(:last-child) {
+			margin-right: 3rem;
+		}
+	}
+}

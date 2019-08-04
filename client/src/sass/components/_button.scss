@@ -1,0 +1,21 @@
+.btn {
+	padding: 0.7em 2em;
+	letter-spacing: 1px;
+	font-size: 1.6rem;
+	border-radius: 3px;
+	border: 1px solid $color-primary;
+	box-shadow: 0 0.3rem 0.6rem rgba($color-black, 0.2);
+	color: $color-white;
+	text-decoration: none;
+	transition: all 0.3s ease-in;
+	cursor: pointer;
+
+	&:hover,
+	&:focus {
+		transform: translateY(-3px);
+	}
+
+	&--primary {
+		background-color: $color-primary;
+	}
+}

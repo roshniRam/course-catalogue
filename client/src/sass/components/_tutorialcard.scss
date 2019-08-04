@@ -1,0 +1,80 @@
+.tutorial-card {
+	display: block;
+	background-color: $on-background-color;
+	border: 1px solid $on-background-color;
+	padding: 2rem 3rem;
+	border-radius: 3px;
+	box-shadow: 0 0.3rem 0.6rem rgba($color-black, 0.2);
+	color: $color-white;
+	text-decoration: none;
+	transition: all 0.3s ease-out;
+
+	&:hover,
+	&:focus {
+		transform: translateY(-3px);
+		box-shadow: 0 0.4rem 0.8rem rgba($color-black, 0.3);
+	}
+
+	&:focus {
+		border: 1px solid $color-primary;
+	}
+
+	&__header {
+		text-align: center;
+
+		h1 {
+			width: 32rem;
+			font-size: 2rem;
+			font-weight: 500;
+			display: inline-block;
+			border-bottom: 1px solid $color-primary;
+			margin-bottom: 2rem;
+			white-space: nowrap;
+			overflow: hidden;
+			text-overflow: ellipsis;
+		}
+	}
+
+	&__info p {
+		font-size: 1.6rem;
+		margin-bottom: 1rem;
+	}
+
+	&__tags {
+		margin-top: 2rem;
+		display: flex;
+		flex-wrap: wrap;
+	}
+
+	&__tag {
+		display: inline-block;
+		font-size: 1.2rem;
+		padding: 0.5em 1.5em;
+		border-radius: 5rem;
+		margin-bottom: 1.2rem;
+
+		&:not(:last-child) {
+			margin-right: 1rem;
+		}
+
+		&--red {
+			background-color: #d83636;
+		}
+
+		&--blue {
+			background-color: #0c8a9e;
+		}
+
+		&--green {
+			background-color: #00b442;
+		}
+
+		&--yellow {
+			background-color: #d3cc00;
+		}
+
+		&--lime {
+			background-color: #90b807;
+		}
+	}
+}

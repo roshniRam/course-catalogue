@@ -1,0 +1,18 @@
+.tag-card {
+	background-color: $on-background-color;
+	padding: 2.5rem 0;
+	text-align: center;
+	border-radius: 3px;
+	font-size: 2rem;
+	box-shadow: 0 0.3rem 0.6rem rgba($color-black, 0.2);
+	color: $color-white;
+	text-decoration: none;
+	border: 1px solid $on-background-color;
+	transition: all 0.25s ease-out;
+
+	&:hover {
+		transform: translateY(-3px);
+		box-shadow: 0 0.5rem 1rem rgba($color-black, 0.2);
+		border: 2px solid $color-primary;
+	}
+}
