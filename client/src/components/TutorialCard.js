@@ -25,7 +25,12 @@ function TutorialCard(props) {
 				</section>
 				<section className="tutorial-card__tags">
 					{props.tutorial.tags.map((tag, index) => (
-						<span key={tag} className={`tutorial-card__tag tutorial-card__tag--${colors[index % colors.length]}`}>{tag}</span>
+						<span
+							key={tag}
+							className={`tutorial-card__tag tutorial-card__tag--${colors[index % colors.length]}`}
+						>
+							{tag}
+						</span>
 					))}
 				</section>
 			</section>

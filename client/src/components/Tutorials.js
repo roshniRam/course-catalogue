@@ -2,16 +2,12 @@ import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import { getTutorials } from '../actions/tutorial.action';
+import convertTagName from '../utils/convertTagName';
 
 import TutorialCard from './TutorialCard';
 
 function Tutorials(props) {
-	const tag = props.match.params.tag
-		.replace(/-sharp/g, '#')
-		.replace(/-plus/g, '+')
-		.replace(/-dot-/g, '.')
-		.replace(/dot-/g, '.')
-		.replace(/-/g, ' ');
+	const tag = convertTagName(props.match.params.tag);
 
 	useEffect(() => {
 		props.getTutorials(props.match.params.tag);

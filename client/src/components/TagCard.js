@@ -1,13 +1,10 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
+import convertTagName from '../utils/convertTagName';
+
 function TagCard(props) {
-	const tag = props.tag
-		.replace(/-sharp/g, '#')
-		.replace(/-plus/g, '+')
-		.replace(/-dot-/g, '.')
-		.replace(/dot-/g, '.')
-		.replace(/-/g, ' ');
+	const tag = convertTagName(props.tag);
 
 	return (
 		<Link to={`/tutorials/${props.tag}`} className="tag-card">

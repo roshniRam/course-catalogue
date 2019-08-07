@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getTags } from '../actions/tag.action';
+import convertTagName from '../utils/convertTagName';
 
 import Tutorial from '../img/tutorial.svg';
 
@@ -44,18 +45,8 @@ function NewTutorialForm(props) {
 
 	useEffect(() => {
 		props.getTags();
-		const allTags = props.tag.tags.map(tag =>
-			createOption(
-				tag.tag
-					.replace(/-sharp/g, '#')
-					.replace(/-plus/g, '+')
-					.replace(/-dot-/g, '.')
-					.replace(/dot-/g, '.')
-					.replace(/-/g, ' ')
-			)
-		);
+		const allTags = props.tag.tags.map(tag => createOption(convertTagName(tag.tag)));
 		setOptions(allTags);
-		console.log(props.tag);
 	}, [props.tag.tags.length]);
 
 	return (
