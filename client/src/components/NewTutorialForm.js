@@ -1,16 +1,62 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Creatable from 'react-select/creatable';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+
+import { getTags } from '../actions/tag.action';
 
 import Tutorial from '../img/tutorial.svg';
 
-function NewTutorialForm() {
-	const [options, setOptions] = useState([{ label: 'React', value: 'React' }, { label: 'Redux', value: 'Redux' }]);
-	const [tags, setTags] = useState([{ label: 'React', value: 'React' }]);
+function NewTutorialForm(props) {
+	const [options, setOptions] = useState([]);
+	const [tags, setTags] = useState([]);
+	const [input, setInput] = useState({
+		title: '',
+		educator: '',
+		link: '',
+		medium: 'Video',
+		type: 'Free',
+		skillLevel: 'Beginner'
+	});
 
-	const onChange = selectedValues => {
+	const submitTutorial = event => {
+		event.preventDefault();
+
+		const allTags = tags.map(tag => tag.value);
+		console.log({ ...input, tags: allTags });
+	};
+
+	const onChange = event => {
+		setInput({
+			...input,
+			[event.target.name]: event.target.value
+		});
+	};
+
+	const changeSelect = selectedValues => {
 		setTags(selectedValues);
 	};
+
+	const createOption = tag => ({
+		label: tag,
+		value: tag
+	});
+
+	useEffect(() => {
+		props.getTags();
+		const allTags = props.tag.tags.map(tag =>
+			createOption(
+				tag.tag
+					.replace(/-sharp/g, '#')
+					.replace(/-plus/g, '+')
+					.replace(/-dot-/g, '.')
+					.replace(/dot-/g, '.')
+					.replace(/-/g, ' ')
+			)
+		);
+		setOptions(allTags);
+		console.log(props.tag);
+	}, [props.tag.tags.length]);
 
 	return (
 		<main className="new-tutorial">
@@ -19,22 +65,27 @@ function NewTutorialForm() {
 					<h1 className="heading--primary">New Tutorial</h1>
 				</header>
 				<section className="new-tutorial__form">
-					<form>
+					<form onSubmit={submitTutorial}>
 						<div className="input input--alternate">
 							<label htmlFor="new-tutorial-title">Tutorial Title</label>
-							<input id="new-tutorial-title" />
+							<input id="new-tutorial-title" name="title" value={input.title} onChange={onChange} />
 						</div>
 						<div className="input input--alternate">
 							<label htmlFor="new-tutorial-educator">Educator's Name</label>
-							<input id="new-tutorial-educator" />
+							<input
+								id="new-tutorial-educator"
+								name="educator"
+								value={input.educator}
+								onChange={onChange}
+							/>
 						</div>
 						<div className="input input--alternate">
 							<label htmlFor="new-tutorial-link">Link to Original Tutorial</label>
-							<input id="new-tutorial-link" />
+							<input id="new-tutorial-link" name="link" value={input.link} onChange={onChange} />
 						</div>
 						<div className="input__radio">
 							<p className="input__radio-label">Medium</p>
-							<div className="input__radio-group">
+							<div className="input__radio-group" onChange={onChange}>
 								<div className="input--radio">
 									<input
 										id="new-tutorial-video"
@@ -57,7 +108,7 @@ function NewTutorialForm() {
 						</div>
 						<div className="input__radio">
 							<p className="input__radio-label">Type</p>
-							<div className="input__radio-group">
+							<div className="input__radio-group" onChange={onChange}>
 								<div className="input--radio">
 									<input
 										id="new-tutorial-free"
@@ -80,11 +131,11 @@ function NewTutorialForm() {
 						</div>
 						<div className="input__radio">
 							<p className="input__radio-label">Skill Level</p>
-							<div className="input__radio-group">
+							<div className="input__radio-group" onChange={onChange}>
 								<div className="input--radio">
 									<input
 										id="new-tutorial-beginner"
-										name="skill-level"
+										name="skillLevel"
 										type="radio"
 										value="Beginner"
 										defaultChecked
@@ -96,7 +147,7 @@ function NewTutorialForm() {
 								<div className="input--radio">
 									<input
 										id="new-tutorial-intermediate"
-										name="skill-level"
+										name="skillLevel"
 										type="radio"
 										value="Intermediate"
 									/>
@@ -105,12 +156,7 @@ function NewTutorialForm() {
 									</label>
 								</div>
 								<div className="input--radio">
-									<input
-										id="new-tutorial-advanced"
-										name="skill-level"
-										type="radio"
-										value="Advanced"
-									/>
+									<input id="new-tutorial-advanced" name="skillLevel" type="radio" value="Advanced" />
 									<label htmlFor="new-tutorial-advanced" className="input--green-radio">
 										Advanced
 									</label>
@@ -127,7 +173,7 @@ function NewTutorialForm() {
 									value={tags}
 									className="select-box-container"
 									classNamePrefix="select-box"
-									onChange={onChange}
+									onChange={changeSelect}
 								/>
 							</div>
 						</div>
@@ -149,4 +195,9 @@ function NewTutorialForm() {
 	);
 }
 
-export default NewTutorialForm;
+const mapStateToProps = ({ tag }) => ({ tag });
+
+export default connect(
+	mapStateToProps,
+	{ getTags }
+)(NewTutorialForm);

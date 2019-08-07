@@ -1,13 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { getTutorials } from '../actions/tutorial.action';
 
 import TutorialCard from './TutorialCard';
 
-function Tutorials() {
+function Tutorials(props) {
+	const tag = props.match.params.tag
+		.replace(/-sharp/g, '#')
+		.replace(/-plus/g, '+')
+		.replace(/-dot-/g, '.')
+		.replace(/dot-/g, '.')
+		.replace(/-/g, ' ');
+
+	useEffect(() => {
+		props.getTutorials(props.match.params.tag);
+	}, [tag]);
+
 	return (
 		<main className="tutorials">
 			<div className="container">
 				<header className="center">
-					<h1 className="heading--primary tutorials__h1">React Tutorials</h1>
+					<h1 className="heading--primary tutorials__h1">{tag} Tutorials</h1>
 				</header>
 				<section>
 					<p className="tutorials__p">Filters</p>
@@ -81,17 +95,18 @@ function Tutorials() {
 					</section>
 				</section>
 				<section className="tutorials__list">
-					<TutorialCard />
-					<TutorialCard />
-					<TutorialCard />
-					<TutorialCard />
-					<TutorialCard />
-					<TutorialCard />
-					<TutorialCard />
+					{props.tutorial.tutorials.map(tutorial => (
+						<TutorialCard key={tutorial._id} tutorial={tutorial} />
+					))}
 				</section>
 			</div>
 		</main>
 	);
 }
 
-export default Tutorials;
+const mapStateToProps = ({ tutorial }) => ({ tutorial });
+
+export default connect(
+	mapStateToProps,
+	{ getTutorials }
+)(Tutorials);

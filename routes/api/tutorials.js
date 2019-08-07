@@ -24,19 +24,18 @@ router.get('/all', (req, res) => {
 router.get('/tag/:tag', (req, res) => {
 	// Split the request param by '-' and join by ' '. ex machine-learning -> machine learning
 	let tag = req.params.tag
-		.replace('-sharp', '#')
-		.replace('-plus', '+')
-		.replace('dot-', '.')
-		.replace('-dot-', '.');
+		.replace(/-sharp/g, '#')
+		.replace(/-plus/g, '+')
+		.replace(/-dot-/g, '.')
+		.replace(/dot-/g, '.')
+		.replace(/-/g, ' ');
 
-	tag = `^${tag.split('-').join(' ')}$`;
 	// 1 - Find the tutorial with given tag from the database (regex is used to find tag ingoring case)
 	// 2 - Return the tutorials array in response
 	Tutorial.find({ tags: { $regex: tag, $options: 'i' } })
 		.sort({ title: 1 })
 		.then(tutorials => {
-			if (tutorials.length === 0) return res.json({ tutorials, error: 'No tutorials found' });
-			else res.json({ tutorials });
+			res.json({ tutorials });
 		})
 		.catch(err => res.status(500).json({ error: 'Unable to get tutorials', errorMsg: err }));
 });

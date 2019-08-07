@@ -1,8 +1,15 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
+
+import { getTags } from '../actions/tag.action';
 
 import TagCard from './TagCard';
 
-function Home() {
+function Home(props) {
+	useEffect(() => {
+		props.getTags();
+	}, [props.tag.tags.length]);
+
 	return (
 		<div className="container">
 			<main className="homepage">
@@ -10,16 +17,18 @@ function Home() {
 					<h1 className="heading--primary">A collection of best Programming Courses & Tutorials</h1>
 				</header>
 				<section className="homepage__tags">
-					<TagCard />
-					<TagCard />
-					<TagCard />
-					<TagCard />
-					<TagCard />
-					<TagCard />
+					{props.tag.tags.map(tag => (
+						<TagCard key={tag.tag} tag={tag.tag} />
+					))}
 				</section>
 			</main>
 		</div>
 	);
 }
 
-export default Home;
+const mapStateToProps = ({ tag }) => ({ tag });
+
+export default connect(
+	mapStateToProps,
+	{ getTags }
+)(Home);
