@@ -21,7 +21,7 @@ function Login(props) {
 
 		const { email, password } = input;
 
-		props.logIn({ email, password });
+		props.logIn({ email, password }, props.history);
 	};
 
 	return (

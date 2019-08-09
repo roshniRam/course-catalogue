@@ -4,7 +4,7 @@ import jwt_decode from 'jwt-decode';
 import setAuthToken from '../utils/setAuthToken';
 import { authTypes } from '../constants';
 
-export const signUp = user => dispatch => {
+export const signUp = (user, history) => dispatch => {
 	axios.post('/api/auth/register', user).then(res => {
 		// Save / Set token to local storage
 		const { token } = res.data;
@@ -15,10 +15,12 @@ export const signUp = user => dispatch => {
 		const decoded = jwt_decode(token);
 		// Set current user
 		dispatch(setCurrentUser(decoded));
+
+		history.push('/');
 	});
 };
 
-export const logIn = user => dispatch => {
+export const logIn = (user, history) => dispatch => {
 	axios.post('/api/auth/login', user).then(res => {
 		// Save / Set token to local storage
 		const { token } = res.data;
@@ -29,6 +31,8 @@ export const logIn = user => dispatch => {
 		const decoded = jwt_decode(token);
 		// Set current user
 		dispatch(setCurrentUser(decoded));
+
+		history.push('/');
 	});
 };
 
@@ -39,7 +43,6 @@ export const logOut = () => dispatch => {
 	setAuthToken(false);
 	// Set current user to {}
 	dispatch(setCurrentUser({}));
-	window.location.href = '/';
 };
 
 export const setCurrentUser = decoded => ({

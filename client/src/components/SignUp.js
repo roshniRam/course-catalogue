@@ -23,7 +23,7 @@ function SignUp(props) {
 
 		const { name, email, password, confirmPassword } = input;
 
-		props.signUp({ name, email, password });
+		props.signUp({ name, email, password }, props.history);
 	};
 
 	return (

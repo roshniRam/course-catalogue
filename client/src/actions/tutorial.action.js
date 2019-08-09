@@ -8,8 +8,10 @@ export const getTutorials = tag => dispatch => {
 	});
 };
 
-export const submitTutorial = tutorial => dispatch => {
+export const submitTutorial = (tutorial, history) => dispatch => {
 	axios.post('/api/tutorials', tutorial).then(res => {
 		dispatch({ type: tutorialTypes.SUBMIT_TUTORIAL, payload: res.data });
+
+		history.push('/');
 	});
 };

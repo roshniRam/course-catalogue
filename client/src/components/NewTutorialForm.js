@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
 import { getTags } from '../actions/tag.action';
+import { submitTutorial } from '../actions/tutorial.action';
 import convertTagName from '../utils/convertTagName';
 
 import Tutorial from '../img/tutorial.svg';
@@ -24,6 +25,13 @@ function NewTutorialForm(props) {
 		event.preventDefault();
 
 		const allTags = tags.map(tag => tag.value);
+
+		const tutorial = {
+			...input,
+			tags: allTags
+		};
+
+		props.submitTutorial(tutorial, props.history);
 	};
 
 	const onChange = event => {
@@ -47,7 +55,7 @@ function NewTutorialForm(props) {
 		const allTags = props.tag.tags.map(tag => createOption(convertTagName(tag.tag)));
 		setOptions(allTags);
 		// eslint-disable-next-line
-	}, []);
+	}, [props.tag.tags.length]);
 
 	return (
 		<main className="new-tutorial">
@@ -190,5 +198,5 @@ const mapStateToProps = ({ tag }) => ({ tag });
 
 export default connect(
 	mapStateToProps,
-	{ getTags }
+	{ getTags, submitTutorial }
 )(NewTutorialForm);

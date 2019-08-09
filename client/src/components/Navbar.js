@@ -1,9 +1,12 @@
 import React from 'react';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+
+import { logOut } from '../actions/auth.action';
 
 import Logo from '../img/logo.svg';
 
-function Navbar() {
+function Navbar(props) {
 	return (
 		<nav className="navbar">
 			<Link to="/" className="navbar__logo">
@@ -13,15 +16,28 @@ function Navbar() {
 				<li className="navbar__link">
 					<Link to="/submit-tutorial">Submit a tutorial</Link>
 				</li>
-				<li className="navbar__link">
-					<Link to="/login">Log In</Link>
-				</li>
-				<li className="navbar__link">
-					<Link to="/signup">Sign Up</Link>
-				</li>
+				{!props.auth.authenticated ? (
+					<>
+						<li className="navbar__link">
+							<Link to="/login">Log In</Link>
+						</li>
+						<li className="navbar__link">
+							<Link to="/signup">Sign Up</Link>
+						</li>
+					</>
+				) : (
+					<li className="navbar__link">
+						<Link to="/" onClick={props.logOut}>Log Out</Link>
+					</li>
+				)}
 			</ul>
 		</nav>
 	);
 }
 
-export default Navbar;
+const mapStateToProps = ({ auth }) => ({ auth });
+
+export default connect(
+	mapStateToProps,
+	{ logOut }
+)(Navbar);
