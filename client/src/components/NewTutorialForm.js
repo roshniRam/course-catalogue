@@ -24,7 +24,6 @@ function NewTutorialForm(props) {
 		event.preventDefault();
 
 		const allTags = tags.map(tag => tag.value);
-		console.log({ ...input, tags: allTags });
 	};
 
 	const onChange = event => {
@@ -47,7 +46,8 @@ function NewTutorialForm(props) {
 		props.getTags();
 		const allTags = props.tag.tags.map(tag => createOption(convertTagName(tag.tag)));
 		setOptions(allTags);
-	}, [props.tag.tags.length]);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<main className="new-tutorial">

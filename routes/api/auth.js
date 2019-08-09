@@ -10,10 +10,10 @@ const quickemailverification = require('quickemailverification')
 
 const User = require('../../models/User');
 
-// Routes for /api/users
+// Routes for /api/auth
 
 // Type		POST
-// URL		/api/users/login
+// URL		/api/auth/login
 // Desc		Login user / Return token
 router.post('/login', (req, res) => {
 	// Destructure the email and password from request body
@@ -45,7 +45,7 @@ router.post('/login', (req, res) => {
 });
 
 // Type		POST
-// URL		/api/users/register
+// URL		/api/auth/register
 // Desc		Creates a new user
 router.post('/register', (req, res) => {
 	// 1 - Find the user by comparing email with emails in all documents in the collection
@@ -68,13 +68,16 @@ router.post('/register', (req, res) => {
 
 					newUser
 						.save()
-						.then(user => {
-							const newUser = {
-								_id: user._id,
-								name: user.name,
-								email: user.email
+						.then(newUser => {
+							const user = {
+								_id: newUser._id,
+								name: newUser.name,
+								email: newUser.email
 							};
-							res.json({ user: 'New User Registered', newUser });
+
+							jwt.sign(user, secretOrKey, { expiresIn: 12 * 60 * 60 }, (err, token) => {
+								res.json({ user, token: `Bearer ${token}` });
+							});
 						})
 						.catch(err => res.json({ error: 'Unable to register', errorMsg: err }));
 				} else {

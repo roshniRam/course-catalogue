@@ -6,7 +6,7 @@ const path = require('path');
 // eslint-disable-next-line
 const mongoose = require('./db/mongoose');
 
-const users = require('./routes/api/users');
+const auth = require('./routes/api/auth');
 const tags = require('./routes/api/tags');
 const tutorials = require('./routes/api/tutorials');
 
@@ -22,7 +22,7 @@ app.use(passport.initialize());
 require('./config/passport')(passport);
 
 // Routes
-app.use('/api/users', users);
+app.use('/api/auth', auth);
 app.use('/api/tags', tags);
 app.use('/api/tutorials', tutorials);
 

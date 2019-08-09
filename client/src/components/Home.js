@@ -8,7 +8,8 @@ import TagCard from './TagCard';
 function Home(props) {
 	useEffect(() => {
 		props.getTags();
-	}, [props.tag.tags.length]);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<div className="container">

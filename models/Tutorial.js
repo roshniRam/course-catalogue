@@ -27,6 +27,10 @@ const TutorialSchema = new Schema({
 	skillLevel: {
 		type: String,
 		required: true
+	},
+	submittedBy: {
+		type: Schema.Types.ObjectId,
+		ref: 'user'
 	}
 });
 

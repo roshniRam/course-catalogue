@@ -54,7 +54,8 @@ router.post('/', passport.authenticate('jwt', { session: false }), (req, res) =>
 		medium,
 		type,
 		skillLevel,
-		tags
+		tags,
+		submittedBy: req.user._id
 	});
 
 	// 1 - Save the tutorial

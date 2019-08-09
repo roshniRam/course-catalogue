@@ -11,7 +11,8 @@ function Tutorials(props) {
 
 	useEffect(() => {
 		props.getTutorials(props.match.params.tag);
-	}, [tag]);
+		// eslint-disable-next-line
+	}, []);
 
 	return (
 		<main className="tutorials">

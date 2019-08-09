@@ -1,5 +1,5 @@
-export const userTypes = {
-	GET_USER: 'GET_USER'
+export const authTypes = {
+	SET_CURRENT_USER: 'SET_CURRENT_USER'
 };
 
 export const tutorialTypes = {
