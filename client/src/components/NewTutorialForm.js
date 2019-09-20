@@ -26,6 +26,18 @@ function NewTutorialForm(props) {
 
 		const allTags = tags.map(tag => tag.value);
 
+		const errors = {};
+
+		if (input.title.trim() === '') {
+			errors.title = 'Please add the title for the tutorial';
+		}
+		if (input.educator.trim() === '') {
+			errors.educator = 'Please add the name of the educator';
+		}
+		if (input.link.trim() === '') {
+			errors.link = 'Please add the link to the original tutorial';
+		}
+
 		const tutorial = {
 			...input,
 			tags: allTags
@@ -162,7 +174,7 @@ function NewTutorialForm(props) {
 								</div>
 							</div>
 							<div className="input__select">
-								<label htmlFor="new-tutorial-tags">Tags</label>
+								<label htmlFor="new-tutorial-tags">Tags <span className="info">(maximum 5)</span></label>
 								<Creatable
 									id="new-tutorial-tags"
 									isClearable
@@ -173,6 +185,7 @@ function NewTutorialForm(props) {
 									className="select-box-container"
 									classNamePrefix="select-box"
 									onChange={changeSelect}
+									isDisabled={tags.length >= 5}
 								/>
 							</div>
 						</div>

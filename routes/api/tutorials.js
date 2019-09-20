@@ -6,22 +6,9 @@ const Tutorial = require('../../models/Tutorial');
 // Routes for /api/tutorials
 
 // Type		GET
-// URL		/api/tutorials/all
-// Desc		Returns list of all uploaded tutorials
-router.get('/all', (req, res) => {
-	// 1 - Find all tutorials from the database
-	// 2 - Sort them in ascending order
-	// 3 - Return the array of tutorials in response
-	Tutorial.find({})
-		.sort({ title: 1 })
-		.then(tutorials => res.json({ tutorials }))
-		.catch(err => res.status(500).json({ error: 'Unable to get tutorials', errorMsg: err }));
-});
-
-// Type		GET
-// URL		/api/tutorials/tag/:tag
+// URL		/api/tutorials/:tag
 // Desc		Returns list of tutorials of the given tag
-router.get('/tag/:tag', (req, res) => {
+router.get('/:tag', (req, res) => {
 	// Split the request param by '-' and join by ' '. ex machine-learning -> machine learning
 	let tag = req.params.tag
 		.replace(/-sharp/g, '#')

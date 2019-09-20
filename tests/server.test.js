@@ -186,22 +186,10 @@ describe('Route /api/users', () => {
 
 // Tests for Tutorials
 describe('Route /api/tutorials', () => {
-	describe('GET /api/tutorials/all', () => {
-		test('should return list of all tutorials', done => {
-			request(app)
-				.get('/api/tutorials/all')
-				.expect(200)
-				.expect(res => {
-					expect(res.body.tutorials.length).toBe(tutorials.length);
-				})
-				.end(done);
-		});
-	});
-
-	describe('GET /api/tutorials/tag/:tag', () => {
+	describe('GET /api/tutorials/:tag', () => {
 		test('should return list of tutorials of the given tag', done => {
 			request(app)
-				.get(`/api/tutorials/tag/${tags[1].tag}`)
+				.get(`/api/tutorials/${tags[1].tag}`)
 				.expect(200)
 				.expect(res => {
 					expect(res.body.tutorials).toBeTruthy();
@@ -212,7 +200,7 @@ describe('Route /api/tutorials', () => {
 
 		test('should return empty array if no tutorials found', done => {
 			request(app)
-				.get(`/api/tutorials/tag/${tags[0].tag}`)
+				.get(`/api/tutorials/${tags[0].tag}`)
 				.expect(res => {
 					expect(res.body.tutorials.length).toBe(0);
 				})

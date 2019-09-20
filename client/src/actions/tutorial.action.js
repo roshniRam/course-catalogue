@@ -3,7 +3,7 @@ import axios from 'axios';
 import { tutorialTypes } from '../constants';
 
 export const getTutorials = tag => dispatch => {
-	axios.get(`/api/tutorials/tag/${tag}`).then(res => {
+	axios.get(`/api/tutorials/${tag}`).then(res => {
 		dispatch({ type: tutorialTypes.GET_TUTORIALS, payload: res.data });
 	});
 };
