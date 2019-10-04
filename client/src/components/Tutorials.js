@@ -58,7 +58,7 @@ function Tutorials(props) {
 	const tag = convertTagName(props.match.params.tag);
 	const tutorials =
 		filteredTutorials.length === 0 ? (
-			<p className="info">No Tutorials Found with the following filters</p>
+			<p className="info">No tutorials found with the following filters</p>
 		) : (
 			filteredTutorials.map(tutorial => <TutorialCard key={tutorial._id} tutorial={tutorial} />)
 		);

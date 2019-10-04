@@ -2,6 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 
 const Tag = require('../../models/Tag');
+const { tagValidator } = require('../../validation/tags');
 
 // Routes for /api/tags
 
@@ -26,6 +27,13 @@ router.get('/', (req, res) => {
 // URL		/api/tags
 // Desc		Adds a new tag to the database
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+	// Validate input data
+	const { errors, isValid } = tagValidator(req.body);
+
+	if (!isValid) {
+		res.status(400).json({ errors });
+	}
+
 	// 1 - Create a new tag using Tag model
 	// 2 - Save and return the new tag in response
 	const newTag = req.body.tag

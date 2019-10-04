@@ -34,7 +34,8 @@
 		"mongoose": "^5.3.9",
 		"passport": "^0.4.0",
 		"passport-jwt": "^4.0.0",
-		"quickemailverification": "^1.0.2"
+		"quickemailverification": "^1.0.2",
+		"validator": "^11.1.0"
 	},
 	"devDependencies": {
 		"babel-jest": "24.8.0",

@@ -2,6 +2,7 @@ const router = require('express').Router();
 const passport = require('passport');
 
 const Tutorial = require('../../models/Tutorial');
+const { tutorialValidator } = require('../../validation/tutorials');
 
 // Routes for /api/tutorials
 
@@ -31,6 +32,13 @@ router.get('/:tag', (req, res) => {
 // URL		/api/tutorials
 // Desc		Adds a new tutorial to the database
 router.post('/', passport.authenticate('jwt', { session: false }), (req, res) => {
+	// Validate input data
+	const { errors, isValid } = tutorialValidator(req.body);
+
+	if (!isValid) {
+		res.status(400).json({ errors });
+	}
+
 	// Destructre the fields from request body
 	const { title, educator, link, medium, type, skillLevel, tags } = req.body;
 	// Create a new tutorial with the given fields
