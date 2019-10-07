@@ -8,5 +8,13 @@ export const tutorialTypes = {
 };
 
 export const tagTypes = {
-	GET_TAGS: 'GET_TAGS'
+	GET_TAGS: 'GET_TAGS',
+	ADD_TAG: 'ADD_TAG'
+};
+
+export const errorTypes = {
+	AUTH_ERRORS: 'AUTH_ERRORS',
+	TUTORIAL_ERRORS: 'TUTORIAL_ERRORS',
+	TAG_ERRORS: 'TAG_ERRORS',
+	CLEAR_ERRORS: 'CLEAR_ERRORS'
 };

@@ -3,8 +3,9 @@ import Creatable from 'react-select/creatable';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 
-import { getTags } from '../actions/tag.action';
+import { getTags, addTag } from '../actions/tag.action';
 import { submitTutorial } from '../actions/tutorial.action';
+import { clearErrors } from '../actions/error.action';
 import convertTagName from '../utils/convertTagName';
 
 import Tutorial from '../img/tutorial.svg';
@@ -20,47 +21,60 @@ function NewTutorialForm(props) {
 		type: 'Free',
 		skillLevel: 'Beginner'
 	});
+	const [isTyping, setIsTyping] = useState(true);
 
-	const submitTutorial = event => {
-		event.preventDefault();
-
-		const allTags = tags.map(tag => tag.value);
-
-		const errors = {};
-
-		if (input.title.trim() === '') {
-			errors.title = 'Please add the title for the tutorial';
-		}
-		if (input.educator.trim() === '') {
-			errors.educator = 'Please add the name of the educator';
-		}
-		if (input.link.trim() === '') {
-			errors.link = 'Please add the link to the original tutorial';
-		}
-
-		const tutorial = {
-			...input,
-			tags: allTags
-		};
-
-		props.submitTutorial(tutorial, props.history);
-	};
+	const createOption = tag => ({
+		label: tag,
+		value: tag
+	});
 
 	const onChange = event => {
 		setInput({
 			...input,
 			[event.target.name]: event.target.value
 		});
+
+		if (!isTyping) {
+			setIsTyping(true);
+		}
+
+		if (props.error.authErrors) {
+			props.clearErrors();
+		}
 	};
 
 	const changeSelect = selectedValues => {
-		setTags(selectedValues);
+		setTags(selectedValues || []);
+
+		if (!isTyping) {
+			setIsTyping(true);
+		}
+
+		if (props.error.tutorialErrors) {
+			props.clearErrors();
+		}
 	};
 
-	const createOption = tag => ({
-		label: tag,
-		value: tag
-	});
+	const submitTutorial = event => {
+		event.preventDefault();
+		setIsTyping(false);
+
+		const allTags = tags.map(tag => tag.value);
+		const allOptions = options.map(option => option.value);
+
+		const newTags = allTags.filter(tag => !allOptions.includes(tag));
+
+		const tutorial = {
+			...input,
+			tags: allTags
+		};
+
+		if (newTags.length > 0) {
+			newTags.forEach(tag => props.addTag({ tag }));
+		}
+
+		props.submitTutorial(tutorial, props.history);
+	};
 
 	useEffect(() => {
 		props.getTags();
@@ -80,6 +94,9 @@ function NewTutorialForm(props) {
 						<div className="input input--alternate">
 							<label htmlFor="new-tutorial-title">Tutorial Title</label>
 							<input id="new-tutorial-title" name="title" value={input.title} onChange={onChange} />
+							{props.error.tutorialErrors && props.error.tutorialErrors.name && !isTyping ? (
+								<small className="error">{props.error.tutorialErrors.name}</small>
+							) : null}
 						</div>
 						<div className="input input--alternate">
 							<label htmlFor="new-tutorial-educator">Educator's Name</label>
@@ -89,10 +106,16 @@ function NewTutorialForm(props) {
 								value={input.educator}
 								onChange={onChange}
 							/>
+							{props.error.tutorialErrors && props.error.tutorialErrors.educator && !isTyping ? (
+								<small className="error">{props.error.tutorialErrors.educator}</small>
+							) : null}
 						</div>
 						<div className="input input--alternate">
 							<label htmlFor="new-tutorial-link">Link to Original Tutorial</label>
 							<input id="new-tutorial-link" name="link" value={input.link} onChange={onChange} />
+							{props.error.tutorialErrors && props.error.tutorialErrors.link && !isTyping ? (
+								<small className="error">{props.error.tutorialErrors.link}</small>
+							) : null}
 						</div>
 						<div className="input__radio">
 							<p className="input__radio-label">Medium</p>
@@ -174,7 +197,9 @@ function NewTutorialForm(props) {
 								</div>
 							</div>
 							<div className="input__select">
-								<label htmlFor="new-tutorial-tags">Tags <span className="info">(maximum 5)</span></label>
+								<label htmlFor="new-tutorial-tags">
+									Tags <span className="info">(maximum 5)</span>
+								</label>
 								<Creatable
 									id="new-tutorial-tags"
 									isClearable
@@ -185,8 +210,13 @@ function NewTutorialForm(props) {
 									className="select-box-container"
 									classNamePrefix="select-box"
 									onChange={changeSelect}
-									isDisabled={tags.length >= 5}
 								/>
+								{props.error.tutorialErrors && props.error.tutorialErrors.tags && !isTyping ? (
+									<small className="error">{props.error.tutorialErrors.tags}</small>
+								) : null}
+								{props.error.tagErrors && props.error.tagErrors.tags && !isTyping ? (
+									<small className="error">{props.error.tagErrors.name}</small>
+								) : null}
 							</div>
 						</div>
 						<section className="new-tutorial__form-buttons">
@@ -207,9 +237,9 @@ function NewTutorialForm(props) {
 	);
 }
 
-const mapStateToProps = ({ tag }) => ({ tag });
+const mapStateToProps = ({ tag, error }) => ({ tag, error });
 
 export default connect(
 	mapStateToProps,
-	{ getTags, submitTutorial }
+	{ getTags, addTag, submitTutorial, clearErrors }
 )(NewTutorialForm);

@@ -11,6 +11,11 @@ export default (state = initialState, action) => {
 				...state,
 				tags: action.payload.tags
 			};
+		case tagTypes.ADD_TAG:
+			return {
+				...state,
+				tags: [...state.tags, action.payload.tag]
+			};
 		default:
 			return state;
 	}

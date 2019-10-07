@@ -1,4 +1,6 @@
 .input {
+	margin-bottom: 2rem;
+
 	label {
 		display: inline-block;
 		font-size: 1.8rem;
@@ -7,7 +9,7 @@
 
 	input {
 		display: block;
-		margin-bottom: 2rem;
+		margin-bottom: 0.5rem;
 		width: 100%;
 		font-size: 1.6rem;
 		background-color: $background-color;
@@ -106,6 +108,7 @@ div[class$='-control'] {
 	background-color: $on-background-color;
 	border: none;
 	border-radius: 3px;
+	margin-bottom: 0.5rem;
 }
 
 div[class^='css-'] {

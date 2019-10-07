@@ -3870,13 +3870,6 @@ qs@~6.5.2:
   resolved "https://registry.yarnpkg.com/qs/-/qs-6.5.2.tgz#cb3ae806e8740444584ef154ce8ee98d403f3e36"
   integrity sha512-N5ZAX4/LxJmF+7wN74pUD6qAh9/wnvdQcjq9TZjevvXzSUo7bfmw91saqMjzGS2xq91/odN2dW/WOl7qQHNDGA==
 
-quickemailverification@^1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/quickemailverification/-/quickemailverification-1.0.2.tgz#a6db098c115853fe2dc27c8d6f720e28c0ca3f17"
-  integrity sha512-hOnb5GEU5AIsnLEL5fvbXISOamNz1Wee0tpaAhj2x7SW4wxpCYCXnQ4DUCZ7kPzczJ+R/haF/HiW9yBxD4nHnQ==
-  dependencies:
-    request "2.x.x"
-
 range-parser@~1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/range-parser/-/range-parser-1.2.1.tgz#3cf37023d199e1c24d1a55b84800c2f3e6468031"
@@ -4017,7 +4010,7 @@ request-promise-native@^1.0.5:
     stealthy-require "^1.1.1"
     tough-cookie "^2.3.3"
 
-request@2.x.x, request@^2.87.0:
+request@^2.87.0:
   version "2.88.0"
   resolved "https://registry.yarnpkg.com/request/-/request-2.88.0.tgz#9c2fca4f7d35b592efe57c7f0a55e81052124fef"
   integrity sha512-NAqBSrijGLZdM0WZNsInLJpkJokL72XYjUpnB0iwsRgxh7dB6COrHnTBNwN0E+lHDAJzu7kLAkDeY08z2/A0hg==
